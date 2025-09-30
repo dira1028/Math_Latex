@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{amsmath}    % 수식 작성을 위한 핵심 패키지 (align, gather 등)
+\usepackage{amssymb}    % 추가 수학 기호 사용을 위한 패키지
+\usepackage{kotex}      % 한글 사용을 위한 패키지
+\usepackage{amsthm}     % 정리/예제 환경 정의를 위한 패키지
+\usepackage{geometry}   % 페이지 여백 설정을 위한 패키지
+\usepackage{tcolorbox}  % 박스 코멘트 작성을 위한 패키지
+
+% amsthm: 번호 없는 예제 환경 정의
+\newtheorem*{ex}{예제} 
+
+% tcolorbox: 박스 코멘트 환경 정의
+\newtcolorbox{mycomment}{
+    colback=yellow!10!white,    % 박스 배경색 (밝은 노랑)
+    colframe=red!50!black,      % 박스 테두리색 (붉은 검정)
+    boxsep=5pt,                 
+    arc=4pt,                    
+    leftrule=0.5mm, rightrule=0.5mm, toprule=0.5mm, bottomrule=0.5mm 
+}
+
+
+\title{미분방정식}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{미분방정식의 분류}
+
+\subsection*{선형 방정식 (Linear Equations)}
+\begin{itemize}
+    \item $y' + y = 0$
+    \item $x^2y' + y = 0$
+\end{itemize}
+
+\subsection*{비선형 방정식 (Non-linear Equations)}
+\begin{itemize}
+    \item $yy' + y = 0$
+    \item $y' = y^2$
+\end{itemize}
+
+\subsection*{정규형 (Normal Form)}
+\begin{itemize}
+    \item $ f(x, y, y') = 0 \Rightarrow y' = f(x, y) $
+\end{itemize}
+
+\begin{mycomment}
+    미분방정식의 해를 구할 수 없는 경우에는 Slope Field를 통해 Solution Curve를 추정한다.
+\end{mycomment}
+
+\clearpage
+
+\section{Separable Equations}
+
+Separable Equation의 형태는 다음과 같다
+\[ \frac{dy}{dx} = H(x, y) = g(x)h(y) \]
+\[ \frac{dy}{dx} = \frac{g(x)}{f(y)} \quad \text{or} \quad f(y)\frac{dy}{dx} - g(x) = 0 \]
+
+\subsection{기본 풀이법}
+
+\begin{ex} 
+다음 미분 방정식을 풀어보시오.
+\[ \frac{dy}{dx} = -6xy \]
+\end{ex}
+
+\textbf{Pf)}
+\begin{enumerate}
+    \item x, y에 대해 항 분리
+    \begin{equation} \label{eq:separate}
+        \frac{1}{y}dy = -6x dx
+    \end{equation}
+    
+    \item 양변을 적분
+    \begin{align}
+        \int \frac{1}{y}dy &= \int -6x dx \notag \\ 
+        \ln|y| &= -3x^2 + C \tag{*}
+    \end{align}
+    \item $y$에 대해 정리
+    \begin{equation}
+        y = Ae^{-3x^2} 
+    \end{equation}
+\end{enumerate}
+
+
+\subsection*{(1)번과 (2)번 과정으로 넘어갈 수 있는 이유} 
+
+\textbf{how (1)?}
+\begin{align*}
+    \frac{dy}{dx} = \frac{g(x)}{f(y)} &\to \frac{1}{f(y)}dy = g(x)dx \\
+    &\int \frac{1}{f(y)}dy = \int g(x)dx \tag{**}\\ 
+\end{align*}
+
+\begin{align*}
+    f(y)\frac{dy}{dx} - g(x) = 0 \\
+    \intertext{}\\
+    \intertext{Let $F'(y) = f(y)$ and $G'(x) = g(x)$} % F'(x)를 F'(y)로 수정했습니다.
+    \frac{d}{dx}[F(y(x))] &=F'(y) \cdot \frac{dy}{dx}=f(y)\frac{dy}{dx} \quad \text{(by Chain Rule)} \\
+    &\to \frac{d}{dx}[F(y(x))] - \frac{d}{dx}[G(x)] = 0 \\
+    &\to \frac{d}{dx}[F(y(x)) - G(x)] = 0 \\
+    &\to F(y(x)) - G(x) = C \quad \\
+    &= \int f(y) dy = \int g(x) dx
+\end{align*}
+
+이는 $\text{(**)}$의 결과와 동일하다.
+
+
+\noindent\textbf{how (2)?}
+\begin{align*}
+    \int \frac{1}{y}dy &= \begin{cases} 
+        \ln(y) + C_1& \text{if } y > 0 \\ 
+        \ln(-y) + C_2& \text{if } y < 0 
+    \end{cases}
+\end{align*}
+
+$\text{(*) $\to$ (2)}$로 넘어갈 수 있는 이유는 실제 미분방정식의 해를 통해 Solution Curve를 구할 때\\
+IC에 의해 $y > 0$인 경우와 $y < 0$인 경우 둘 중 하나로 정해진다. \\
+따라서 하나의 일반해로 표기한다.
+
+
+\end{document}

@@ -1,0 +1,188 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt} % 문단 간격을 조금 더 넓혀 가독성 확보
+\pagenumbering{gobble}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{kotex}
+\usepackage{float}
+\title{Statistical Properties of Random Variables}
+\author{Sarah Wright}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Properties of Expectation}
+
+\subsection{Linearity of Expectation (Additivity)\hfill \textnormal{\footnotesize[526,528]}}
+For any random variables $X$ and $Y$ (regardless of independence):
+\begin{align*}
+    E(X+Y) & = \sum_x \sum_y (x+y) P(X=x, Y=y)                                                                                                                          \\
+           & = \sum_x \sum_y x P(X=x, Y=y) + \sum_x \sum_y y P(X=x, Y=y)                                                                                                \\
+           & = \sum_x x \underbrace{\left( \sum_y P(X=x, Y=y) \right)}_{=P(X=x) \text{ (Marginal)}} + \sum_y y \underbrace{\left( \sum_x P(X=x, Y=y) \right)}_{=P(Y=y)} \\
+           & = \sum_x x P(X=x) + \sum_y y P(Y=y)                                                                                                                        \\
+           & = E(X) + E(Y)
+\end{align*}
+\textbf{Note:} This can be generalized to $E\left(\sum_{i=1}^{n} X_i\right) = \sum_{i=1}^{n} E(X_i)$.
+
+
+\subsection{Expectation of Product (Independence)}
+If $X$ and $Y$ are \textbf{independent}, then $P(X=x, Y=y) = P(X=x)P(Y=y)$. Thus:
+\begin{align*}
+    E(XY) & = \sum_{x} \sum_{y} xy P(X=x, Y=y)                                       \\
+          & = \sum_{x} \sum_{y} xy P(X=x)P(Y=y) \quad (\because \text{Independence}) \\
+          & = \left( \sum_{x} x P(X=x) \right) \left( \sum_{y} y P(Y=y) \right)      \\
+          & = E(X)E(Y)
+\end{align*}
+
+
+
+
+
+
+\section{Covariance and Correlation}
+
+
+\subsection{Covariance}
+Using the linearity of expectation derived above:
+\begin{align*}
+    Cov(X,Y) & = E[(X-E(X))(Y-E(Y))]                             \\
+             & = E[(X-\mu_X)(Y-\mu_Y)]                           \\
+             & = E(XY) - \mu_X E(Y) - \mu_Y E(X) + \mu_X \mu_Y   \\
+             & = E(XY) - \mu_X \mu_Y - \mu_X \mu_Y + \mu_X \mu_Y \\
+             & = E(XY) - \mu_X \mu_Y
+\end{align*}
+If $X, Y$ are independent, we know $E(XY) = E(X)E(Y) = \mu_X \mu_Y$. Substituting this into the covariance formula:
+\[
+    Cov(X, Y) = \mu_X \mu_Y - \mu_X \mu_Y = 0
+\]
+if $Cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated(선형관계가 없다)\\
+(Note: The converse is generally not true. )\hfill [536,537]
+
+
+\subsection{Correlation}
+\begin{align*}
+    corr(X,Y) := \frac{\text{Cov}(X,Y)}{\sigma_X \cdot \sigma_Y} = \frac{E(XY)-E(X)E(Y)}{\sqrt{\text{Var}(X)} \sqrt{\text{Var}(Y)}}
+\end{align*}
+
+
+
+
+\section{sum of distributions}
+\subsection{expectation}
+using Linearity of Expectation
+\begin{align*}
+    E\sum (X_1+\cdots X_n)=\sum E(X_1+\cdots X_n)
+\end{align*}
+
+
+\subsection{variance}
+\begin{align}
+    E\left(\sum_{i=1}^{n} X_i\right)^2 & = \sum_{i=1}^{n} E(X_i^2) + \sum_{i \neq j} E(X_i X_j)    \\
+    Var\left(\sum_{i=1}^{n} X_i\right) & = \sum_{i=1}^{n} Var(X_i) + \sum_{i \neq j} Cov(X_i, X_j)
+\end{align}
+
+\begin{proof}
+    First, considering the algebraic expansion of a square:
+    \begin{equation}
+        \left( \sum_{i=1}^{n} X_i \right)^2 = \sum_{i=1}^{n} X_i^2 + \sum_{i \neq j} X_i X_j
+    \end{equation}
+    Using the definition of variance $Var(Z) = E[(Z - E[Z])^2]$:
+    \begin{align*}
+        Var\left(\sum_{i=1}^{n} X_i\right) & = E\left[ \left( \sum_{i=1}^{n} X_i - E\left[\sum_{i=1}^{n} X_i\right] \right)^2 \right]                                              \\
+                                           & = E\left[ \left( \sum_{i=1}^{n} (X_i - E[X_i]) \right)^2 \right]                                                                      \\
+                                           & = \sum_{i=1}^{n} Var(X_i) + \underbrace{ \sum_{i \neq j} E\left[(X_i - E[X_i])(X_j - E[X_j])\right]}_{= \sum_{i \neq j} Cov(X_i,X_j)}
+    \end{align*}
+    If $X_1, \dots, X_n$ are \textbf{pairwise independent}, then $Cov(X_i, X_j) = 0$ for all $i \neq j$. Therefore:
+    \[ Var\left(\sum_{i=1}^{n} X_i\right) = \sum_{i=1}^{n} Var(X_i) \]
+\end{proof}
+
+
+% \usepackage{float}
+
+\section{Convolution\hfill \textnormal{\footnotesize [540, 541]}}
+
+\begin{itemize}
+    \item convolution of dice : $f(2), f(3), \cdots ,f(12)$
+          % [H]를 써야 리스트 바로 아래에 '강제로' 고정됩니다.
+          \begin{figure}[H]
+              \centering
+              \includegraphics[width=0.5\textwidth]{convolution_dice.png}
+              \label{fig:dice}
+          \end{figure}
+\end{itemize}
+
+Convolution은 두 다항식을 곱하는 것과 동일한 원리이다. \\
+두 다항식 $f(x), g(x)$를 다음과 같다고 하자.
+\[
+    f(x) = a_0 + a_1x + a_2x^2 + \cdots + a_n x^n = \sum_{i=0}^{n} a_i x^i
+\]
+\[
+    g(x) = b_0 + b_1x + b_2x^2 + \cdots + b_n x^n = \sum_{j=0}^{n} b_j x^j
+\]
+두 다항식의 곱 $h(x) = f(x) \cdot g(x)$은 다음과 같으며, 각 항의 계수는 convolution형태로 나타난다.
+\[
+    h(x) = \sum_{k=0}^{2n} \left( \sum_{i+j=k} a_i b_j \right) x^k
+\]
+이때, $i+j=k$를 만족하는 모든 $i, j$에 대한 계수의 곱($a_i b_j$)을 연산한 후 더한 값이 $x^k$의 새로운 계수가 된다.
+
+\vspace{5mm} % 여백 추가
+
+Convolution of probability measures도 이와 유사한 구조를 가진다. continuous case에서도 $x+y=z$위의 density를 적분하는 것과 동일하다.
+만약 $a_i$와 $b_j$를 각각 확률 $P(X=i)$, $P(Y=j)$로 생각한다면, 위 연산은 두 독립 확률변수의 합 $Z=X+Y$의 분포를 구하는 과정과 정확히 일치한다.
+
+\begin{itemize}
+    \item \textbf{Marginal Density}\\
+          If $f$ is the joint density of $(X,Y)$, then the two marginal densities are given by:
+          \[
+              f_X(x) = \int_{-\infty}^{\infty} f(x,y) \, dy
+          \]
+          \[
+              f_Y(y) = \int_{-\infty}^{\infty} f(x,y) \, dx
+          \]
+          \textbf{joint CDF} is given by:
+          \[
+              F_{X,Y}(x, y)=P(X\leq x, Y\leq y) = \int_{-\infty}^{y} \int_{-\infty}^{x} f(u,v) \, du \, dv
+          \]
+          If $X$ and $Y$ are \textbf{independent}, then:
+          \[
+              f(x,y) = f_X(x)f_Y(y)
+          \]
+\end{itemize}
+
+\subsection{Convolution of probability measures\hfill\textnormal{\footnotesize{[540, 541]}}}
+
+$Z = X+Y$의 확률밀도함수(PDF)를 유도하기 위해, 먼저 $Z$의 누적분포함수(CDF)를 구한다.
+
+Let $X$ and $Y$ be independent random variables with probability density functions $f$ and $g$, respectively.
+\begin{align*}
+    F_Z(z) = P(X+Y \le z) & = \iint_{x+y \le z} f(x)g(y) \, dx \, dy                                         \\
+                          & = \int_{-\infty}^{\infty} g(y) \left( \int_{-\infty}^{z-y} f(x) \, dx \right) dy
+\end{align*}
+To find the PDF $f_Z(z)$, we differentiate $F_Z(z)$ with respect to $z$:
+\begin{align*}
+    f*g(z)=f_Z(z) = \frac{d}{dz} F_Z(z) & = \int_{-\infty}^{\infty} g(y) \left( \frac{d}{dz} \int_{-\infty}^{z-y} f(x) \, dx \right) dy \\
+                                        & = \int_{-\infty}^{\infty} g(y) f(z-y) \, dy \tag{1}
+\end{align*}
+\hfill\qed
+
+\begin{itemize}
+    \item Convolution of probability measures on groups
+          \begin{equation*}
+              (f * g)(z) = \sum_{y \in G} g(y) f(z \circ y^{-1}) \quad \text{for each } z \in G. \tag*{[541]}
+          \end{equation*}
+          [541]은 앞서 살펴본 Continuous case의 Convolution을 Finite Group에 적용시킨 것이다.
+          \begin{itemize}
+              \item (1)에서의 $f(z-y)$가 [541]에서의 $f(x \circ y^-1)$과 대응된다. 이 때, $\circ$는 Group의 연산자, $y^-1$은 Group에서 $y$의 역원이다.
+              \item (example (c) of [541]) \quad $GL(n,GF(2))$는 일반 선형 군(General Linear Group)으로, $GF(2)$의 원소를 성분으로 갖는 $n \times n$ 가역행렬(invertible matrix)들로 구성된 군(group)이다.
+          \end{itemize}
+\end{itemize}
+
+
+
+\end{document}

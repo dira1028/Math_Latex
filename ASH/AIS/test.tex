@@ -9,8 +9,8 @@
 \usepackage{color}
 \usepackage{kotex}
 \usepackage{float}
-\title{Statistical Properties of Random Variables}
-\author{Sarah Wright}
+\title{}
+\author{ash}
 \date{}
 
 \begin{document}
@@ -201,7 +201,7 @@ To find the PDF $f_Z(z)$, we differentiate $F_Z(z)$ with respect to $z$:
          & = \int_{0}^{\infty} x \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
          & = \int_{0}^{\infty} \frac{\beta^{\alpha} x^{\alpha} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
          & = \int_{0}^{\infty} \alpha \frac{\beta^{\alpha}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx \quad (\because \Gamma(\alpha+1) = \alpha\Gamma(\alpha)) \\
-         & = \frac{\alpha}{\beta} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+1}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx }_{\text{PDF of } \Gamma(\alpha+1, \beta)} \quad \\
+         & = \frac{\alpha}{\beta} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+1}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+1, \beta)} \quad \\
          & = \frac{\alpha}{\beta} \times 1 \\
          & = \frac{\alpha}{\beta}
 \end{align*}
@@ -210,7 +210,7 @@ To find the PDF $f_Z(z)$, we differentiate $F_Z(z)$ with respect to $z$:
         E(X^2) & = \int_{0}^{\infty} x^2 \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
                & = \int_{0}^{\infty} \frac{1}{\beta} \frac{\beta^{\alpha+1} x^{\alpha + 1} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
                & = \int_{0}^{\infty} \frac{\alpha(\alpha+1)}{\beta} \frac{\beta^{\alpha+1} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx \quad (\because \Gamma(\alpha+2) = \alpha(\alpha+1)\Gamma(\alpha)) \\
-               & = \frac{\alpha(\alpha+1)}{\beta^2} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+2} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx }_{\text{PDF of } \Gamma(\alpha+2, \beta)} \quad (\text{Multiply by } \frac{\beta}{\beta}) \\
+               & = \frac{\alpha(\alpha+1)}{\beta^2} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+2} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+2, \beta)} \quad \\
                & = \frac{\alpha(\alpha+1)}{\beta^2}\times 1\\
                 &= \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}
     \end{align*}

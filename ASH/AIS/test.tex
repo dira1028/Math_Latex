@@ -183,6 +183,45 @@ To find the PDF $f_Z(z)$, we differentiate $F_Z(z)$ with respect to $z$:
           \end{itemize}
 \end{itemize}
 
+\section{Gamma distribution}
+\begin{itemize}
+    \item Gamma function\\
+    $$ \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1} e^{-x} \, dx $$
+    $$ \Gamma(\alpha + 1) = \alpha \Gamma(\alpha) $$
+    \item Gamma distribution\\
+    $$ f(x; \alpha, \beta) = \frac{\beta^{\alpha} x^{\alpha - 1} e^{-\beta x}}{\Gamma(\alpha)}, \quad x > 0 $$
+\end{itemize}
+
+
+\subsection{Gamma Function : Expectation and Variance}
+\begin{itemize}
+    \item $E(X)$
+    \begin{align*}
+    E(X) & = \int_{0}^{\infty} x f(x; \alpha, \beta) \, dx \\
+         & = \int_{0}^{\infty} x \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
+         & = \int_{0}^{\infty} \frac{\beta^{\alpha} x^{\alpha} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
+         & = \int_{0}^{\infty} \alpha \frac{\beta^{\alpha}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx \quad (\because \Gamma(\alpha+1) = \alpha\Gamma(\alpha)) \\
+         & = \frac{\alpha}{\beta} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+1}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx }_{\text{PDF of } \Gamma(\alpha+1, \beta)} \quad \\
+         & = \frac{\alpha}{\beta} \times 1 \\
+         & = \frac{\alpha}{\beta}
+\end{align*}
+    \item $E(X^2)$
+    \begin{align*}
+        E(X^2) & = \int_{0}^{\infty} x^2 \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
+               & = \int_{0}^{\infty} \frac{1}{\beta} \frac{\beta^{\alpha+1} x^{\alpha + 1} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
+               & = \int_{0}^{\infty} \frac{\alpha(\alpha+1)}{\beta} \frac{\beta^{\alpha+1} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx \quad (\because \Gamma(\alpha+2) = \alpha(\alpha+1)\Gamma(\alpha)) \\
+               & = \frac{\alpha(\alpha+1)}{\beta^2} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+2} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx }_{\text{PDF of } \Gamma(\alpha+2, \beta)} \quad (\text{Multiply by } \frac{\beta}{\beta}) \\
+               & = \frac{\alpha(\alpha+1)}{\beta^2}\times 1\\
+                &= \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}
+    \end{align*}
+    \item $Var(X)=E(X^2)-(EX)^2$
+    \begin{align*}
+        Var(X) = & \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}-\left(\frac{\alpha}{\beta}\right)^2 \\
+               = & \frac{\alpha}{\beta^2}
+    \end{align*}
+\end{itemize}
+
+
 
 
 \end{document}

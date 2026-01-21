@@ -188,21 +188,21 @@ Let $A=\{(x,y)\mid x+y=z\}$. Then:
            &= \sum_{y} f(z-y)g(y)
 \end{align*}
 
-\subsection{Convolution of Group}
-Discrete Case와 비슷하게 증명할 수 있다.
-Assume that the independent random variables
+\subsection{Convolution on Finite Groups}
+Assume that the independent random variables $X$ and $Y$ take values on a finite group $G$ with group operation $\circ$. Let $X$ and $Y$ be distributed according to $\tau$ and $\eta$ respectively.
+\begin{align*}
+    p(x,y) = P(X=x, Y=y) = P(X=x)P(Y=y) = \eta(x)\tau(y)
+\end{align*}
+Let $Z = Y \circ X$ and $A = \{(x,y) \in G \times G \mid x \circ y = z\}$. Since $y \circ y = z \iff y = x^{-1} \circ z$, we have:
+\begin{align*}
+    P(Z=z)=P((X,Y)\in A) & = \sum_{(x,y)\in A} p(x,y) \\
+    &= \sum_{x\in G} p(x, z \circ x^{-1}) \\
+    &= \sum_{x \in G} P(Y=z^{-1}\circ x) P(X=x) \\
+    &= \sum_{x \in G} \eta(z \circ x^{-1}) \tau(x)
+\end{align*}
 
-\begin{itemize}
-    \item Convolution of probability measures on groups
-          \begin{equation*}
-              (f * g)(z) = \sum_{y \in G} g(y) f(z \circ y^{-1}) \quad \text{for each } z \in G. \tag*{[541]}
-          \end{equation*}
-          [541]은 앞서 살펴본 Continuous case의 Convolution을 Finite Group에 적용시킨 것이다.
-          \begin{itemize}
-              \item (1)에서의 $f(z-y)$가 [541]에서의 $f(x \circ y^-1)$과 대응된다. 이 때, $\circ$는 Group의 연산자, $y^-1$은 Group에서 $y$의 역원이다.
-              \item (example (c) of [541]) \quad $GL(n,GF(2))$는 일반 선형 군(General Linear Group)으로, $GF(2)$의 원소를 성분으로 갖는 $n \times n$ 가역행렬(invertible matrix)들로 구성된 군(group)이다.
-          \end{itemize}
-\end{itemize}
+
+
 
 \section{Gamma distribution}
 \begin{itemize}
@@ -214,7 +214,7 @@ Assume that the independent random variables
 \end{itemize}
 
 
-\subsection{Gamma Function : Expectation and Variance}
+\subsection{Gamma Distribution : Expectation and Variance}
 \begin{itemize}
     \item $E(X)$
     \begin{align*}

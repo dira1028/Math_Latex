@@ -1,25 +1,6 @@
-\documentclass[12pt]{article}
-\usepackage[margin=1in]{geometry}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{8pt} % 문단 간격을 조금 더 넓혀 가독성 확보
-\pagenumbering{gobble}
-
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{kotex}
-\usepackage{float}
-\title{}
-\author{ash}
-\date{}
-
-\begin{document}
-
-\maketitle
-
 \section{Properties of Expectation}
 
-\subsection{Linearity of Expectation (Additivity)\hfill \textnormal{\footnotesize[526,528]}}
+\subsection{Linearity of Expectation (Additivity)}
 For any random variables $X$ and $Y$ (regardless of independence):
 \begin{align*}
     E(X+Y) & = \sum_x \sum_y (x+y) P(X=x, Y=y)                                                                                                                          \\
@@ -62,7 +43,7 @@ If $X, Y$ are independent, we know $E(XY) = E(X)E(Y) = \mu_X \mu_Y$. Substitutin
     Cov(X, Y) = \mu_X \mu_Y - \mu_X \mu_Y = 0
 \]
 if $Cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated(선형관계가 없다)\\
-(Note: The converse is generally not true. )\hfill [536,537]
+(Note: The converse($Cov=0\rightarrow$ independent) is generally not true. )\hfill [536,537]
 
 
 \subsection{Correlation}
@@ -89,9 +70,8 @@ using Linearity of Expectation
 
 \begin{proof}
     First, considering the algebraic expansion of a square:
-    \begin{equation}
-        \left( \sum_{i=1}^{n} X_i \right)^2 = \sum_{i=1}^{n} X_i^2 + \sum_{i \neq j} X_i X_j
-    \end{equation}
+    $$        \left( \sum_{i=1}^{n} X_i \right)^2 = \sum_{i=1}^{n} X_i^2 + \sum_{i \neq j} X_i X_j
+    $$
     Using the definition of variance $Var(Z) = E[(Z - E[Z])^2]$:
     \begin{align*}
         Var\left(\sum_{i=1}^{n} X_i\right) & = E\left[ \left( \sum_{i=1}^{n} X_i - E\left[\sum_{i=1}^{n} X_i\right] \right)^2 \right]                                              \\
@@ -177,15 +157,15 @@ Assume that you have a pair $(X,Y)$ of independent discrete random variables $X$
 $$p(x,y) = P(X=x, Y=y) = P(X=x)P(Y=y) = f(x)g(y)$$
 Using the indicator function $I_A$:
 \begin{align*}
-I_A(x,y) &= \begin{cases} 1 & \text{if } (x,y) \in A \\ 0 & \text{if } (x,y) \notin A \end{cases} \\
-P((X,Y)\in A) &= \sum_{(x,y)\in A}p(x,y) = \sum_x\sum_y p(x,y) \cdot I_{A}(x,y)
+    I_A(x,y)      & = \begin{cases} 1 & \text{if } (x,y) \in A \\ 0 & \text{if } (x,y) \notin A \end{cases} \\
+    P((X,Y)\in A) & = \sum_{(x,y)\in A}p(x,y) = \sum_x\sum_y p(x,y) \cdot I_{A}(x,y)
 \end{align*}
 We want to know the distribution of $Z=X+Y$.\\
 Let $A=\{(x,y)\mid x+y=z\}$. Then:
 \begin{align*}
-    P(Z=z) &= P((X,Y)\in A) = \sum_{y} p(z-y, y) \\
-           &= \sum_{y} P(X=z-y)P(Y=y) \\   
-           &= \sum_{y} f(z-y)g(y)
+    P(Z=z) & = P((X,Y)\in A) = \sum_{y} p(z-y, y) \\
+           & = \sum_{y} P(X=z-y)P(Y=y)            \\
+           & = \sum_{y} f(z-y)g(y)
 \end{align*}
 
 \subsection{Convolution on Finite Groups}
@@ -193,12 +173,12 @@ Assume that the independent random variables $X$ and $Y$ take values on a finite
 \begin{align*}
     p(x,y) = P(X=x, Y=y) = P(X=x)P(Y=y) = \eta(x)\tau(y)
 \end{align*}
-Let $Z = Y \circ X$ and $A = \{(x,y) \in G \times G \mid x \circ y = z\}$. Since $y \circ y = z \iff y = x^{-1} \circ z$, we have:
+Let $Z = Y \circ X$ and $A = \{(x,y) \in G \times G \mid y \circ x = z\}$. Since $y \circ x = z \iff y = z\circ x^{-1} $, we have:
 \begin{align*}
-    P(Z=z)=P((X,Y)\in A) & = \sum_{(x,y)\in A} p(x,y) \\
-    &= \sum_{x\in G} p(x, z \circ x^{-1}) \\
-    &= \sum_{x \in G} P(Y=z^{-1}\circ x) P(X=x) \\
-    &= \sum_{x \in G} \eta(z \circ x^{-1}) \tau(x)
+    P(Z=z)=P((X,Y)\in A) & = \sum_{(x,y)\in A} p(x,y)                    \\
+                         & = \sum_{x\in G} p(x, z \circ x^{-1})          \\
+                         & = \sum_{x \in G} P(Y=z^{-1}\circ x) P(X=x)    \\
+                         & = \sum_{x \in G} \eta(z \circ x^{-1}) \tau(x)
 \end{align*}
 
 
@@ -207,42 +187,94 @@ Let $Z = Y \circ X$ and $A = \{(x,y) \in G \times G \mid x \circ y = z\}$. Since
 \section{Gamma distribution}
 \begin{itemize}
     \item Gamma function\\
-    $$ \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1} e^{-x} \, dx $$
-    $$ \Gamma(\alpha + 1) = \alpha \Gamma(\alpha) $$
+          $$ \Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1} e^{-x} \, dx $$
+          $$ \Gamma(\alpha + 1) = \alpha \Gamma(\alpha) $$
     \item Gamma distribution\\
-    $$ f(x; \alpha, \beta) = \frac{\beta^{\alpha} x^{\alpha - 1} e^{-\beta x}}{\Gamma(\alpha)}, \quad x > 0 $$
+          $$ f(x; \alpha, \beta) = \frac{\beta^{\alpha} x^{\alpha - 1} e^{-\beta x}}{\Gamma(\alpha)}, \quad x > 0 $$
 \end{itemize}
 
 
 \subsection{Gamma Distribution : Expectation and Variance}
 \begin{itemize}
     \item $E(X)$
-    \begin{align*}
-    E(X) & = \int_{0}^{\infty} x f(x; \alpha, \beta) \, dx \\
-         & = \int_{0}^{\infty} x \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
-         & = \int_{0}^{\infty} \frac{\beta^{\alpha} x^{\alpha} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
-         & = \int_{0}^{\infty} \alpha \frac{\beta^{\alpha}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx \quad (\because \Gamma(\alpha+1) = \alpha\Gamma(\alpha)) \\
-         & = \frac{\alpha}{\beta} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+1}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+1, \beta)} \quad \\
-         & = \frac{\alpha}{\beta} \times 1 \\
-         & = \frac{\alpha}{\beta}
-\end{align*}
+          \begin{align*}
+              E(X) & = \int_{0}^{\infty} x f(x; \alpha, \beta) \, dx                                                                                                                                                  \\
+                   & = \int_{0}^{\infty} x \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx                                                                                                    \\
+                   & = \int_{0}^{\infty} \frac{\beta^{\alpha} x^{\alpha} e^{-\beta x}}{\Gamma(\alpha)} \, dx                                                                                                          \\
+                   & = \int_{0}^{\infty} \alpha \frac{\beta^{\alpha}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx \quad (\because \Gamma(\alpha+1) = \alpha\Gamma(\alpha))                                         \\
+                   & = \frac{\alpha}{\beta} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+1}x^{\alpha} e^{-\beta x}}{\Gamma(\alpha+1)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+1, \beta)} \quad \\
+                   & = \frac{\alpha}{\beta} \times 1                                                                                                                                                                  \\
+                   & = \frac{\alpha}{\beta}
+          \end{align*}
     \item $E(X^2)$
-    \begin{align*}
-        E(X^2) & = \int_{0}^{\infty} x^2 \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx \\
-               & = \int_{0}^{\infty} \frac{1}{\beta} \frac{\beta^{\alpha+1} x^{\alpha + 1} e^{-\beta x}}{\Gamma(\alpha)} \, dx \\
-               & = \int_{0}^{\infty} \frac{\alpha(\alpha+1)}{\beta} \frac{\beta^{\alpha+1} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx \quad (\because \Gamma(\alpha+2) = \alpha(\alpha+1)\Gamma(\alpha)) \\
-               & = \frac{\alpha(\alpha+1)}{\beta^2} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+2} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+2, \beta)} \quad \\
-               & = \frac{\alpha(\alpha+1)}{\beta^2}\times 1\\
-                &= \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}
-    \end{align*}
+          \begin{align*}
+              E(X^2) & = \int_{0}^{\infty} x^2 \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x} \, dx                                                                                                                 \\
+                     & = \int_{0}^{\infty} \frac{1}{\beta} \frac{\beta^{\alpha+1} x^{\alpha + 1} e^{-\beta x}}{\Gamma(\alpha)} \, dx                                                                                                   \\
+                     & = \int_{0}^{\infty} \frac{\alpha(\alpha+1)}{\beta} \frac{\beta^{\alpha+1} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx \quad (\because \Gamma(\alpha+2) = \alpha(\alpha+1)\Gamma(\alpha))                 \\
+                     & = \frac{\alpha(\alpha+1)}{\beta^2} \underbrace{ \int_{0}^{\infty} \frac{\beta^{\alpha+2} x^{\alpha+1} e^{-\beta x}}{\Gamma(\alpha+2)} \, dx }_{\text{PDF of } \text{Gamma distribution}(\alpha+2, \beta)} \quad \\
+                     & = \frac{\alpha(\alpha+1)}{\beta^2}\times 1                                                                                                                                                                      \\
+                     & = \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}
+          \end{align*}
     \item $Var(X)=E(X^2)-(EX)^2$
-    \begin{align*}
-        Var(X) = & \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}-\left(\frac{\alpha}{\beta}\right)^2 \\
-               = & \frac{\alpha}{\beta^2}
-    \end{align*}
+          \begin{align*}
+              Var(X) = & \frac{\alpha^2}{\beta^2}+\frac{\alpha}{\beta^2}-\left(\frac{\alpha}{\beta}\right)^2 \\
+              =        & \frac{\alpha}{\beta^2}
+          \end{align*}
+\end{itemize}
+
+
+\section{Weak Law of large number}
+\subsection{Markov inequality and Chebyshev inequality}
+\begin{itemize}
+    \item Markov's Inequality
+          \begin{align*}
+              P(X \ge a) \le \frac{E[X]}{a} \quad (\text{for } X \ge 0, a > 0)
+          \end{align*}
+          \begin{proof}
+              Let indicator function $I_{\{X \ge a\}}$ be defined as:
+              \begin{align*}
+                  I = \begin{cases}
+                          1 & \text{if } X \ge a \\
+                          0 & \text{if } X < a
+                      \end{cases}
+              \end{align*}
+              Since $X \ge 0$ and $a > 0$, the following inequality holds:
+              \begin{align*}
+                  I_{\{X \ge a\}}                 & \le \frac{X}{a} \quad (\text{since } X \ge 0) \\
+                  E\left[ I_{\{X \ge a\}} \right] & \le E\left( \frac{1}{a}X \right)              \\
+                  P(X \ge a)                      & \le \frac{E[X]}{a}
+              \end{align*}
+          \end{proof}
+
+    \item{Chebyshev inequality}
+          \begin{align*}
+              P(\mid {X-\mu}\mid\leq k)\geq \frac{\sigma^2}{k^2}
+          \end{align*}
+          \begin{proof}
+              by Markov indequality:
+              \begin{align*}
+                  P(\mid {X-\mu}\mid\leq k)=P((X-\mu)^2\leq k^2)\geq \frac{1}{k^2}E(X-\mu)^2=\frac{1}{k^2}Var(X)
+              \end{align*}
+          \end{proof}
 \end{itemize}
 
 
 
+\subsection{weak LLN}
+Let $X_1,X_2\cdots$ be iid random variables with a finite first moment, $EX_i=\mu$ then:
+$$\frac{X_1+X_2+\cdots +X_n}{n}\rightarrow\mu$$
+as $n\rightarrow\infty$
+\begin{proof}
+    Denote $\mu = E[X], \sigma^2 = \text{Var}(X)$, and let $S_n = X_1 + \cdots + X_n$. Then:
+    \begin{align*}
+        E[S_n] & = E[X_1] + \cdots + E[X_n] = n\mu \quad \text{and} \quad \text{Var}(S_n) = n\sigma^2 \\
+        \intertext{Therefore, by Chebyshev's inequality:}
+        P\left( \left| \frac{S_n}{n} - \mu \right| > \epsilon \right)
+               & = P\left( | S_n - n\mu | > n\epsilon \right)                                         \\
+               & \le \frac{n\sigma^2}{(n\epsilon)^2}                                                  \\
+               & = \frac{\sigma^2}{n\epsilon^2} \to 0 \quad \text{as } n \to \infty
+    \end{align*}
+\end{proof}
 
-\end{document}
+
+\href{https://grokipedia.com/page/Product_measure}{[534]}
